@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: herbal-medicine-platform
+  datasource:
+    url: jdbc:postgresql://localhost:5432/herbalData
+    username: ${DB_USERNAME:herbal_app}
+    password: ${DB_PASSWORD:herbal_local_dev}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+app:
+  bootstrap-admin:
+    email: ${BOOTSTRAP_ADMIN_EMAIL:}
+    password: ${BOOTSTRAP_ADMIN_PASSWORD:}
+    full-name: ${BOOTSTRAP_ADMIN_FULL_NAME:Administrator}

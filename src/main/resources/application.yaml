@@ -1,21 +1,40 @@
 spring:
   application:
-    name: herbal-medicine-platform
+    name: medicine-platform
   datasource:
-    url: jdbc:postgresql://localhost:5432/herbalData
-    username: ${DB_USERNAME:herbal_app}
-    password: ${DB_PASSWORD:herbal_local_dev}
-    driver-class-name: org.postgresql.Driver
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/medicine_platform}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:}
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
     open-in-view: false
     properties:
       hibernate:
-        jdbc:
-          time_zone: UTC
-app:
-  bootstrap-admin:
-    email: ${BOOTSTRAP_ADMIN_EMAIL:}
-    password: ${BOOTSTRAP_ADMIN_PASSWORD:}
-    full-name: ${BOOTSTRAP_ADMIN_FULL_NAME:Administrator}
+        format_sql: true
+  jackson:
+    default-property-inclusion: non_null
+  data:
+    web:
+      pageable:
+        max-page-size: 100
+  flyway:
+    baseline-on-migrate: true
+    baseline-version: 0
+
+server:
+  port: ${SERVER_PORT:8081}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      probes:
+        enabled: true
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
